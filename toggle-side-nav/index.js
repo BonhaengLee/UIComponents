@@ -1,17 +1,27 @@
+const $sideNav = document.getElementById("side-nav");
 const $toggleButton = document.querySelector(".toggle.bx.bx-right-arrow-circle");
 
-const toggle = sessionStorage.getItem("toggle") === "true";
+let toggle = false;
 
 const render = () => {
-  const $sideNav = document.getElementById("side-nav");
+  // const $nav = document.querySelector(".toggle");
+  toggle = sessionStorage.getItem("toggle") === "true";
+
   if (toggle) $sideNav.classList.remove("active");
-  else $sideNav.classList.add("active");
+  else {
+    $sideNav.classList.add("active", "notransition");
+    $toggleButton.classList.add("notransition");
+  }
 };
 
 render();
 
 $toggleButton.onclick = () => {
-  console.log(toggle, sessionStorage.getItem("toggle"), !toggle);
+  // console.log(toggle, sessionStorage.getItem("toggle"), !toggle);
+  // render();
   sessionStorage.setItem("toggle", !toggle);
-  render();
+
+  if (!toggle) {
+    $sideNav.classList.remove("active");
+  } else $sideNav.classList.add("active");
 };
