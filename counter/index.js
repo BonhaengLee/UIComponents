@@ -1,12 +1,23 @@
-const $increaseBtn = document.querySelector('.increase');
-const $decreaseBtn = document.querySelector('.decrease');
-const $counter = document.querySelector('.counter');
+const $increaseButton = document.querySelector(".increase");
+const $decreaseButton = document.querySelector(".decrease");
+const $counter = document.querySelector(".counter");
 
-const increase = () => $counter.textContent = 
-const decrease = () => $counter.textContent = 
+const counter = (() => {
+  let count = 0;
 
-const counter = (())
+  return predicate => {
+    count = predicate(count);
+    return count;
+  };
+})();
 
+const increase = n => ++n;
+const decrease = n => (n > 0 ? --n : 0);
 
-$increaseBtn.onclick = increase();
-$decreaseBtn.onclick = decrease();
+$increaseButton.onclick = () => {
+  $counter.textContent = counter(increase);
+};
+
+$decreaseButton.onclick = () => {
+  $counter.textContent = counter(decrease);
+};
