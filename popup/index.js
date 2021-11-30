@@ -8,27 +8,40 @@ const $popupInput = document.querySelector('.popup-input');
 
 $toggleButton.onclick = () => {
   $popupContainer.style.display = $popupContainer.style.display === 'block' ? 'none' : 'block';
+  $popupMessage.textContent = '';
 };
 
-$closeButton.onclick = e => {
-  e.target.closest('div').style.display = 'none';
+$closeButton.onclick = () => {
+  $popupContainer.style.display = 'none';
+  $popupInput.value = '';
 };
 
-$cancelButton.onclick = e => {
-  e.target.closest('div').style.display = 'none';
+$cancelButton.onclick = () => {
+  $popupContainer.style.display = 'none';
+  $popupInput.value = '';
 };
 
-$okButton.onclick = e => {
-  e.target.closest('div').style.display = 'none';
-  console.log(e.target.closest('input').value);
+$okButton.onclick = () => {
+  $popupContainer.style.display = 'none';
+  const content = $popupInput.value.trim();
 
-  $popupMessage.textContent =
-    e.target.closest('input').value.trim() !== '' ? 'from popup : ' + e.target.closest('input').value : '';
+  if (content !== '') {
+    $popupContainer.style.display = 'none';
+    $popupMessage.textContent = 'from popup : ' + content;
+  }
+
+  $popupInput.value = '';
 };
 
-$popupInput.onchange = e => {
-  console.log(e.target.value);
-  e.target.closest('div').style.display = 'none';
-  $popupMessage.textContent =
-    e.target.closest('input').value.trim() !== '' ? 'from popup : ' + e.target.closest('input').value : '';
+$popupInput.onkeyup = e => {
+  if (e.key !== 'Enter') return;
+
+  const content = $popupInput.value.trim();
+
+  if (content !== '') {
+    $popupContainer.style.display = 'none';
+    $popupMessage.textContent = 'from popup : ' + content;
+  }
+
+  $popupInput.value = '';
 };
