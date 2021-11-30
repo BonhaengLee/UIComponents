@@ -1,4 +1,5 @@
 const $toggleButton = document.querySelector('.toggle-button');
+const $overlay = document.querySelector('.overlay');
 const $popupContainer = document.querySelector('.popup-container');
 const $closeButton = document.querySelector('.close-button');
 const $cancelButton = document.querySelector('.cancel-button');
@@ -8,25 +9,30 @@ const $popupInput = document.querySelector('.popup-input');
 
 $toggleButton.onclick = () => {
   $popupContainer.style.display = $popupContainer.style.display === 'block' ? 'none' : 'block';
+  $overlay.style.display = $overlay.style.display === 'block' ? 'none' : 'block';
   $popupMessage.textContent = '';
 };
 
 $closeButton.onclick = () => {
   $popupContainer.style.display = 'none';
+  $overlay.style.display = 'none';
   $popupInput.value = '';
 };
 
 $cancelButton.onclick = () => {
   $popupContainer.style.display = 'none';
+  $overlay.style.display = 'none';
   $popupInput.value = '';
 };
 
 $okButton.onclick = () => {
   $popupContainer.style.display = 'none';
+  $overlay.style.display = 'none';
   const content = $popupInput.value.trim();
 
   if (content !== '') {
     $popupContainer.style.display = 'none';
+    $overlay.style.display = 'none';
     $popupMessage.textContent = 'from popup : ' + content;
   }
 
@@ -40,6 +46,7 @@ $popupInput.onkeyup = e => {
 
   if (content !== '') {
     $popupContainer.style.display = 'none';
+    $overlay.style.display = 'none';
     $popupMessage.textContent = 'from popup : ' + content;
   }
 

@@ -16,6 +16,8 @@
       body {
         font-family: 'Open Sans';
         font-weight: 300;
+        position: relative;
+        margin: 0 auto;
       }
       .title {
         color: #db5b33;
@@ -23,18 +25,39 @@
         text-align: center;
       }
       /* 팝업을 위한 CSS */
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 10;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
       .popup-container {
-        z-index: 100;
         display: none;
         max-width: 520px;
         min-height: 200px;
-        border: 1px solid gray;
-        padding: 15px 40px;
+        background-color: white;
+        border-radius: 6px;
+        padding: 16px 35px;
+        z-index: 1000;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
 
       .close-button {
-        position: relative;
-        left: 440px;
+        position: absolute;
+        top: 16px;
+        right: 16px;
         background: none;
         border: none;
         cursor: pointer;
@@ -53,6 +76,7 @@
     <!-- 팝업을 위한 HTML -->
     <button class="toggle-button">toggle popup</button>
 
+    <div class="overlay"></div>
     <div class="popup-container">
       <button class="close-button"><i class="bx bx-x bx-flip-vertical"></i></button>
       <h2 class="title">Hello!</h2>
