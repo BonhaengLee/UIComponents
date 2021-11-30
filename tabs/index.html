@@ -141,11 +141,6 @@
             <span class="glider"></span>
             </nav>`;
 
-          const $nav = document.querySelector('nav');
-          $nav.onclick = e => {
-            console.log(e.target);
-          };
-
           // & : tab-content
           $tabs.innerHTML += data
             .map(
@@ -163,6 +158,20 @@
           console.log(e);
         });
 
+      // const $nav = document.querySelector('nav');
+      $tabs.onclick = e => {
+        const $list = document.querySelectorAll('.tab');
+        // console.log(e.target);
+
+        $list.forEach(element => {
+          if (e.target === element) {
+            // if (elemen)
+            element.classList.toggle('active');
+          }
+        });
+        // console.log($list);
+        // e.target.classList = toggle('active', true);
+      };
       // Do something!
     </script>
   </body>
