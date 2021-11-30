@@ -1,6 +1,6 @@
-const $increaseButton = document.querySelector(".increase");
-const $decreaseButton = document.querySelector(".decrease");
-const $counter = document.querySelector(".counter");
+const $increaseButton = document.querySelector('.increase');
+const $decreaseButton = document.querySelector('.decrease');
+const $counter = document.querySelector('.counter');
 
 const counter = (() => {
   let count = 0;
