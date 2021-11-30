@@ -158,21 +158,17 @@
           console.log(e);
         });
 
-      // const $nav = document.querySelector('nav');
-      $tabs.onclick = e => {
-        const $list = document.querySelectorAll('.tab');
-        // console.log(e.target);
+      $tabs.onclick = ({ target }) => {
+        if (!target.matches('.tab')) return;
 
-        $list.forEach(element => {
-          if (e.target === element) {
-            // if (elemen)
-            element.classList.toggle('active');
-          }
-        });
-        // console.log($list);
-        // e.target.classList = toggle('active', true);
+        [...$tabs.children]
+          .filter(v => !v.matches('nav'))
+          .forEach(($tabContent, index) => {
+            const $glider = document.querySelector('.glider');
+            $glider.style.left = `${target.dataset.index * 200}px`;
+            $tabContent.classList.toggle('active', index === +target.dataset.index);
+          });
       };
-      // Do something!
     </script>
   </body>
 </html>
