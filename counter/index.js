@@ -11,8 +11,8 @@ const counter = (() => {
   };
 })();
 
-const increase = n => ++n;
-const decrease = n => (n > 0 ? --n : 0);
+const increase = n => n + 1;
+const decrease = n => (n > 0 ? n - 1 : 0);
 
 $increaseButton.onclick = () => {
   $counter.textContent = counter(increase);
