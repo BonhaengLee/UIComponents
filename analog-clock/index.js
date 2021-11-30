@@ -1,6 +1,6 @@
-const $hour = document.querySelector('.hour');
-const $minute = document.querySelector('.minute');
-const $second = document.querySelector('.second');
+const $hour = document.querySelector('.hand.hour');
+const $minute = document.querySelector('.hand.minute');
+const $second = document.querySelector('.hand.second');
 
 setInterval(() => {
   const day = new Date();
@@ -8,7 +8,7 @@ setInterval(() => {
   const m = day.getMinutes() * 6;
   const s = day.getSeconds() * 6;
 
-  $hour.style.transform = `rotateZ(${h}deg)`;
-  $minute.style.transform = `rotateZ(${m}deg)`;
-  $second.style.transform = `rotateZ(${s}deg)`;
+  $hour.style.setProperty('--deg', h);
+  $minute.style.setProperty('--deg', m);
+  $second.style.setProperty('--deg', s);
 }, 1000);
