@@ -24,12 +24,24 @@
       }
       /* 팝업을 위한 CSS */
       .popup-container {
-        /* display: none; */
+        display: none;
         max-width: 520px;
         min-height: 200px;
+        border: 1px solid gray;
       }
 
-      .bx {
+      .close-button {
+        position: relative;
+        top: 16px;
+        left: 480px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      i {
+        font-size: 24px;
       }
     </style>
     <script defer src="index.js"></script>
@@ -41,15 +53,15 @@
     <button class="toggle-button">toggle popup</button>
 
     <div class="popup-container">
-      <i class="bx bx-x bx-flip-vertical"></i>
+      <button class="close-button"><i class="bx bx-x bx-flip-vertical"></i></button>
       <h2 class="title">Hello!</h2>
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae, quibusdam id molestias numquam eius
         sapiente, alias qui illum et officia aspernatur tenetur maiores nihil veniam in animi harum, saepe distinctio.
       </p>
-      <input type="text" class="input" />
-      <button class="ok">OK</button>
-      <button class="cancle">Cancle</button>
+      <input type="text" class="popup-input" />
+      <button class="ok-button">OK</button>
+      <button class="cancel-button">Cancel</button>
     </div>
 
     <p class="popup-message"></p>
