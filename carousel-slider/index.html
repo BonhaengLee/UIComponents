@@ -29,7 +29,7 @@
         margin: 0 auto;
         overflow: hidden;
         /* carousel 요소의 width 셋팅이 완료될 때까지 감춘다. */
-        /* opacity: 0; */
+        opacity: 0;
       }
       .carousel-slides {
         --currentSlide: 0;
@@ -66,7 +66,7 @@
         right: 0;
       }
     </style>
-    <script defer src="index.js"></script>
+    <!-- <script defer src="index.js"></script> -->
   </head>
   <body>
     <h1 class="title">Carousel Slider</h1>
@@ -82,5 +82,67 @@
       <button class="carousel-control prev">&laquo;</button>
       <button class="carousel-control next">&raquo;</button> -->
     </div>
+    <script>
+      const carousel = ($container, images) => {
+        $container.innerHTML = `<div class="carousel-slides" >
+          <img src="${images[images.length - 1]}" id="lastClone"/>
+          ${images.map(image => `<img src="${image}" />`).join('')}
+          <img src="${images[0]}" id="firstClone"/>
+      </div>
+      <button class="carousel-control prev">&laquo;</button>
+      <button class="carousel-control next">&raquo;</button>`;
+      };
+
+      carousel(document.querySelector('.carousel'), [
+        'movies/movie-1.jpg',
+        'movies/movie-2.jpg',
+        'movies/movie-3.jpg',
+        'movies/movie-4.jpg',
+      ]);
+
+      const $carousel = document.querySelector('.carousel');
+      const $carouselSlide = document.querySelector('.carousel-slides');
+      const $carouselImages = document.querySelectorAll('.carousel-slides img');
+
+      const prevBtn = document.querySelector('.prev');
+      const nextBtn = document.querySelector('.next');
+
+      let counter = 1;
+      let size;
+      document.body.onload = () => {
+        $carousel.style.opacity = 1;
+        size = $carouselImages[0].width + 10;
+        $carousel.style.width = `${size}px`; // margin 10px 포함
+
+        $carouselSlide.style.transform = 'translateX(' + -size * counter + 'px)';
+      };
+
+      nextBtn.addEventListener('click', () => {
+        if (counter >= $carouselImages.length - 1) return;
+        $carouselSlide.style.transition = 'transform 0.4s ease-in-out';
+        counter++;
+        $carouselSlide.style.transform = 'translateX(' + -size * counter + 'px)';
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (counter <= 0) return;
+        $carouselSlide.style.transition = 'transform 0.4s ease-in-out';
+        counter--;
+        $carouselSlide.style.transform = 'translateX(' + -size * counter + 'px)';
+      });
+
+      $carouselSlide.addEventListener('transitionend', () => {
+        console.log('transi', counter, $carouselImages[counter], $carouselImages[counter].id);
+        if ($carouselImages[counter].id === 'lastClone') {
+          $carouselSlide.style.transition = 'none'; // 트랜지션 효과 없애기
+          counter = $carouselImages.length - 2; // couter 초기화
+          $carouselSlide.style.transform = 'translateX(' + -size * counter + 'px)'; // 실제 마지막 이미지로 이동.
+        } else if ($carouselImages[counter].id === 'firstClone') {
+          $carouselSlide.style.transition = 'none';
+          counter = $carouselImages.length - counter; // couter 초기화
+          $carouselSlide.style.transform = 'translateX(' + -size * counter + 'px)';
+        }
+      });
+    </script>
   </body>
 </html>
