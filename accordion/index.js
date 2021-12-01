@@ -1,16 +1,15 @@
 const $accordion = document.querySelector('.accordion');
-const $menuContainer = document.querySelector('.menu-container');
 const $activeSubmenu = document.querySelector('.menu-container.active > .submenu');
-// $activeSubmenu.style.transition = 'none';
 
-$accordion.onclick = e => {
+$accordion.onclick = ({ target }) => {
   [...$accordion.children].forEach(menu => {
-    $accordion.classList.toggle('active', menu.matches(e.target));
-    console.log(menu.textContent);
-    console.log(e.target.textContent);
-    console.log('');
+    menu.classList.toggle('active', menu === target.closest('.menu-container'));
+
+    if (menu === target.closest('.menu-container')) {
+      menu.children[1].style.transition = 'height 0.4s ease';
+      menu.children[1].style.height = `${$activeSubmenu.scrollHeight}px`;
+    } else menu.children[1].style.height = `0`;
   });
-  console.log($accordion.children);
 };
 
 const render = () => {
@@ -18,9 +17,4 @@ const render = () => {
   $activeSubmenu.style.height = `${$activeSubmenu.scrollHeight}px`;
 };
 
-render();
-
-/* 트랜지션 취소 */
-// .notransition {
-//   transition: none !important;
-// }
+document.addEventListener('DOMContentLoaded', render);
