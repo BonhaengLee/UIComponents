@@ -159,22 +159,34 @@
 
       const toaster = {
         add({ type, title, message }) {
-          document.body.insertAdjacentHTML(
-            'beforeend',
-            `<div class="toast toast-${type}"">
-                          <h4 class="toast-heading">${title}</h4>
-                          <div class="toast-message">
-                            <svg width="24" height="24">
-                              <use xlink:href="#${type}" />
-                            </svg>
-                          <p>${message}</p>
-                          </div>
-                          <a class="close">&times;</a>
-                      </div>`
-          );
-          console.log(document.body);
+          // document.body.insertAdjacentHTML(
+          //   'beforeend',
+          //   `<div class="toast toast-${type}"">
+          //                 <h4 class="toast-heading">${title}</h4>
+          //                 <div class="toast-message">
+          //                   <svg width="24" height="24">
+          //                     <use xlink:href="#${type}" />
+          //                   </svg>
+          //                 <p>${message}</p>
+          //                 </div>
+          //                 <a class="close">&times;</a>
+          //             </div>`
+          // );
+          // const temp = document.body.lastElementChild;
+          const toastEl = document.createElement('div');
+          toastEl.classList.add('toast');
+          toastEl.classList.add(`toast-${type}`);
+          toastEl.innerHTML = `<h4 class="toast-heading">${title}</h4>
+                                <div class="toast-message">
+                                  <svg width="24" height="24">
+                                      <use xlink:href="#${type}" />
+                                    </svg>
+                                  <p>${message}</p>
+                                  </div>
+                                <a class="close">&times;</a>`;
+          document.body.appendChild(toastEl);
 
-          setTimeout(() => {}, 3000);
+          setTimeout(() => document.body.removeChild(toastEl), 3000);
         },
       };
 
