@@ -1,26 +1,21 @@
 const $accordion = document.querySelector('.accordion');
 const $menuContainer = document.querySelector('.menu-container');
+const $activeSubmenu = document.querySelector('.menu-container.active > .submenu');
+// $activeSubmenu.style.transition = 'none';
 
 $accordion.onclick = e => {
   [...$accordion.children].forEach(menu => {
-    $accordion.classList.toggle('active', menu === e.target);
+    $accordion.classList.toggle('active', menu.matches(e.target));
+    console.log(menu.textContent);
+    console.log(e.target.textContent);
+    console.log('');
   });
   console.log($accordion.children);
 };
 
 const render = () => {
-  [...$accordion.children].forEach(menuContainer => {
-    const $subMenu = menuContainer.children[1];
-    const $div = [...$subMenu.children];
-    console.log($div);
-
-    for (const x of $div) {
-      console.log(x.children[0].style.transition);
-      x.children[0].style.transition = 'none !important';
-    }
-    $subMenu.style.transition = menuContainer.classList.contains('active') && 'none !important';
-    $subMenu.style.height = menuContainer.classList.contains('active') && `${$subMenu.scrollHeight}px`;
-  });
+  $activeSubmenu.style.transition = 'none';
+  $activeSubmenu.style.height = `${$activeSubmenu.scrollHeight}px`;
 };
 
 render();
