@@ -31,6 +31,7 @@
         --toast-height: 100px;
 
         position: absolute;
+        /* position: relative; */
         right: 0;
         width: var(--toast-width);
         height: var(--toast-height);
@@ -173,9 +174,11 @@
           //             </div>`
           // );
           // const temp = document.body.lastElementChild;
+
           const toastEl = document.createElement('div');
           toastEl.classList.add('toast');
           toastEl.classList.add(`toast-${type}`);
+          // const $toast = document.querySelectorAll('.toast');
           toastEl.innerHTML = `<h4 class="toast-heading">${title}</h4>
                                 <div class="toast-message">
                                   <svg width="24" height="24">
@@ -184,8 +187,12 @@
                                   <p>${message}</p>
                                   </div>
                                 <a class="close">&times;</a>`;
+
+          const $toast = document.querySelectorAll('.toast');
+          console.log($toast);
           document.body.appendChild(toastEl);
 
+          toastEl.style.bottom = `${[...$toast].length * 100}px`;
           setTimeout(() => document.body.removeChild(toastEl), 3000);
         },
       };
