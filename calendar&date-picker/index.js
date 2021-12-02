@@ -21,7 +21,7 @@ const MONTH = [
   'December',
 ];
 
-$calendarGrid.textContent = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].join(' ');
+// $calendarGrid.textContent =
 
 const today = new Date();
 
@@ -38,20 +38,32 @@ window.onclick = e => {
 };
 
 let month = today.getMonth();
-console.log(month);
 let year = today.getFullYear();
-const day = new Date(year, month, 1).getDay();
-console.log(day);
-// 0 ~ 6
 
-const date = new Date(year, month + 1, 0).getDate();
+// & : 이달의 1일의 요일
+const firstDayOfThisMonth = new Date(year, month, 1).getDay();
+// & : 이달의 마지막 날짜
+const lastDateOfThisMonth = new Date(year, month + 1, 0).getDate();
+// & : 저번달의 마지막 날짜
+const lastDateOfLastMonth = new Date(year, month, 0).getDate();
+// & : days-grid
+const dayOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+$calendarGrid.innerHTML = `<div class="days-grid">${dayOfWeek.map(v => `<div>${v}</div>`).join('')}</div>`;
+// & : date-grid
+const $dateGrid = document.createElement('div');
+$dateGrid.classList.add('date-grid');
+$calendarGrid.appendChild($dateGrid);
 
-const dates = [];
-
-for (let i = 1; i <= date; i++) {
-  dates.push(i);
+for (let i = 1; i <= firstDayOfThisMonth; i++) {
+  $dateGrid.innerHTML += `<button><time datetime="2019-01-01">${
+    lastDateOfLastMonth - firstDayOfThisMonth + i
+  }</time></button>`;
 }
-console.log(dates);
+for (let i = 1; i <= lastDateOfThisMonth; i++) {
+  $dateGrid.innerHTML += `<button><time datetime="2019-01-01">${i}</time></button>`;
+}
+// $calendarGrid.innerHTML += '</div>';
+console.log($calendarGrid.innerHTML);
 
 document.body.onload = () => {
   $next.onclick = () => {
