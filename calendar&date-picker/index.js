@@ -2,12 +2,12 @@ const $calendar = document.querySelector('.calendar');
 const $datePicker = document.querySelector('.date-picker');
 const $month = document.querySelector('.month');
 const $year = document.querySelector('.year');
-const $left = document.querySelector('.left');
-const $right = document.querySelector('.right');
+const $prev = document.querySelector('.left');
+const $next = document.querySelector('.right');
 
 const MONTH = [
   'January',
-  'Febuary',
+  'February',
   'March',
   'April',
   'May',
@@ -21,7 +21,6 @@ const MONTH = [
 ];
 
 const today = new Date();
-console.log(today);
 
 $month.textContent = MONTH[today.getMonth()];
 $year.textContent = today.getFullYear();
@@ -35,17 +34,30 @@ window.onclick = e => {
   $calendar.style.display = 'none';
 };
 
-let monthCount = 1;
-let yearCount = 1;
+let month = today.getMonth();
+let year = today.getFullYear();
+const day = today.getDate();
 
-$left.onclick = () => {
-  $month.textContent = MONTH[today.getMonth() - monthCount];
-  console.log(monthCount);
-  monthCount++;
-  if (monthCount === 12) {
-    monthCount = 0;
-    console.log(yearCount);
-    $year.textContent = today.getFullYear() - yearCount;
-    yearCount++;
-  }
+document.body.onload = () => {
+  $next.onclick = () => {
+    if (month === 11) {
+      month = 0;
+      year++;
+    } else {
+      month++;
+    }
+    $month.textContent = MONTH[month];
+    $year.textContent = year;
+  };
+
+  $prev.onclick = () => {
+    if (month === 0) {
+      month = 11;
+      year--;
+    } else {
+      month--;
+    }
+    $month.textContent = MONTH[month];
+    $year.textContent = year;
+  };
 };
