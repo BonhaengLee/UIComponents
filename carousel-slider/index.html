@@ -66,7 +66,6 @@
         right: 0;
       }
     </style>
-    <!-- <script defer src="index.js"></script> -->
   </head>
   <body>
     <h1 class="title">Carousel Slider</h1>
@@ -104,8 +103,8 @@
       const $carouselSlide = document.querySelector('.carousel-slides');
       const $carouselImages = document.querySelectorAll('.carousel-slides img');
 
-      const prevBtn = document.querySelector('.prev');
-      const nextBtn = document.querySelector('.next');
+      const $prevBtn = document.querySelector('.prev');
+      const $nextBtn = document.querySelector('.next');
 
       let counter = 1;
       let size;
@@ -114,35 +113,34 @@
         size = $carouselImages[0].width + 10;
         $carousel.style.width = `${size}px`; // margin 10px 포함
 
-        $carouselSlide.style.transform = 'translateX(' + -size * counter + 'px)';
+        $carouselSlide.style.setProperty('--currentSlide', 1);
       };
 
-      nextBtn.addEventListener('click', () => {
+      $nextBtn.onclick = () => {
         if (counter >= $carouselImages.length - 1) return;
-        $carouselSlide.style.transition = 'transform 0.4s ease-in-out';
+        $carouselSlide.style.setProperty('--duration', 400);
         counter++;
-        $carouselSlide.style.transform = 'translateX(' + -size * counter + 'px)';
-      });
+        $carouselSlide.style.setProperty('--currentSlide', counter);
+      };
 
-      prevBtn.addEventListener('click', () => {
+      $prevBtn.onclick = () => {
         if (counter <= 0) return;
-        $carouselSlide.style.transition = 'transform 0.4s ease-in-out';
+        $carouselSlide.style.setProperty('--duration', 400);
         counter--;
-        $carouselSlide.style.transform = 'translateX(' + -size * counter + 'px)';
-      });
+        $carouselSlide.style.setProperty('--currentSlide', counter);
+      };
 
-      $carouselSlide.addEventListener('transitionend', () => {
-        console.log('transi', counter, $carouselImages[counter], $carouselImages[counter].id);
+      $carouselSlide.ontransitionend = () => {
         if ($carouselImages[counter].id === 'lastClone') {
-          $carouselSlide.style.transition = 'none'; // 트랜지션 효과 없애기
-          counter = $carouselImages.length - 2; // couter 초기화
-          $carouselSlide.style.transform = 'translateX(' + -size * counter + 'px)'; // 실제 마지막 이미지로 이동.
+          $carouselSlide.style.setProperty('--duration', 0);
+          counter = $carouselImages.length - 2;
+          $carouselSlide.style.setProperty('--currentSlide', counter);
         } else if ($carouselImages[counter].id === 'firstClone') {
-          $carouselSlide.style.transition = 'none';
-          counter = $carouselImages.length - counter; // couter 초기화
-          $carouselSlide.style.transform = 'translateX(' + -size * counter + 'px)';
+          $carouselSlide.style.setProperty('--duration', 0);
+          counter = $carouselImages.length - counter;
+          $carouselSlide.style.setProperty('--currentSlide', counter);
         }
-      });
+      };
     </script>
   </body>
 </html>
