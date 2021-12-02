@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendar</title>
+    <!-- 원하는 폰트와 아이콘을 사용해도 좋다. -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" />
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <style>
+      *,
+      *::after,
+      *::before {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Open Sans';
+        font-weight: 300;
+        text-align: center;
+      }
+      .title {
+        color: #db5b33;
+        font-weight: 300;
+        text-align: center;
+      }
+      /* 뷰를 구현하세요. */
+      .date-picker {
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      .calendar {
+        width: 400px;
+        height: 450px;
+        margin: 0 auto;
+        border-radius: 15px;
+        box-shadow: 5px 2px 15px 12px rgba(0, 0, 0, 0.2);
+        display: none;
+      }
+
+      .calendar-nav {
+        width: 400px;
+        height: 100px;
+        background-color: #3bba6d;
+        color: #fff;
+        border-radius: 10px 10px 0 0;
+        display: flex;
+      }
+
+      .left,
+      .right {
+        display: inline-block;
+        color: #fff;
+        cursor: pointer;
+        height: 13px;
+        background: none;
+        border: 0;
+        margin: 0;
+        outline: 0;
+        padding: 0;
+        /* overflow: auto; */
+      }
+
+      .month-year {
+        text-align: center;
+      }
+
+      .calendar-grid {
+        display: grid;
+      }
+    </style>
+    <script defer src="index.js"></script>
+  </head>
+  <body>
+    <h1 class="title">Date Picker</h1>
+    <input type="text" class="date-picker" placeholder="Select date" readonly />
+    <div class="calendar">
+      <div class="calendar-nav">
+        <button class="left">
+          <i class="bx bxs-left-arrow"></i>
+        </button>
+
+        <div class="month-year">
+          <div class="month"></div>
+          <div class="year"></div>
+        </div>
+
+        <button class="right">
+          <i class="bx bxs-right-arrow"></i>
+        </button>
+      </div>
+      <div class="calendar-grid"></div>
+    </div>
+  </body>
+</html>
