@@ -31,7 +31,7 @@
         --toast-height: 100px;
 
         position: absolute;
-        /* position: relative; */
+        bottom: 0px;
         right: 0;
         width: var(--toast-width);
         height: var(--toast-height);
@@ -118,67 +118,12 @@
       </symbol>
     </svg>
 
-    <!--
-    toast-success =>
-    <div class="toast toast-success"">
-      <h4 class="toast-heading">Title</h4>
-      <div class="toast-message">
-        <svg width="24" height="24">
-          <use xlink:href="#success" />
-        </svg>
-        <p>Message</p>
-      </div>
-      <a class="close">&times;</a>
-    </div>
-
-    toast-error =>
-    <div class="toast toast-error"">
-      <h4 class="toast-heading">Title</h4>
-      <div class="toast-message">
-        <svg width="24" height="24">
-          <use xlink:href="#error" />
-        </svg>
-        <p>Message</p>
-      </div>
-      <a class="close">&times;</a>
-    </div>
-
-    toast-warning =>
-    <div class="toast toast-warning"">
-      <h4 class="toast-heading">Title</h4>
-      <div class="toast-message">
-        <svg width="24" height="24">
-          <use xlink:href="#warning" />
-        </svg>
-        <p>Message</p>
-      </div>
-      <a class="close">&times;</a>
-    </div>
-    -->
     <script>
-      /* Do something! */
-
       const toaster = {
         add({ type, title, message }) {
-          // document.body.insertAdjacentHTML(
-          //   'beforeend',
-          //   `<div class="toast toast-${type}"">
-          //                 <h4 class="toast-heading">${title}</h4>
-          //                 <div class="toast-message">
-          //                   <svg width="24" height="24">
-          //                     <use xlink:href="#${type}" />
-          //                   </svg>
-          //                 <p>${message}</p>
-          //                 </div>
-          //                 <a class="close">&times;</a>
-          //             </div>`
-          // );
-          // const temp = document.body.lastElementChild;
-
           const toastEl = document.createElement('div');
-          toastEl.classList.add('toast');
-          toastEl.classList.add(`toast-${type}`);
-          // const $toast = document.querySelectorAll('.toast');
+          toastEl.classList.add('toast', `toast-${type}`);
+
           toastEl.innerHTML = `<h4 class="toast-heading">${title}</h4>
                                 <div class="toast-message">
                                   <svg width="24" height="24">
@@ -187,13 +132,17 @@
                                   <p>${message}</p>
                                   </div>
                                 <a class="close">&times;</a>`;
-
-          const $toast = document.querySelectorAll('.toast');
-          console.log($toast);
           document.body.appendChild(toastEl);
 
-          toastEl.style.bottom = `${[...$toast].length * 100}px`;
           setTimeout(() => document.body.removeChild(toastEl), 3000);
+
+          const $toast = document.querySelectorAll('.toast');
+          let len = $toast.length;
+
+          [...$toast].forEach(toast => {
+            toast.style.bottom = `${(len - 1) * 100}px`;
+            len--;
+          });
         },
       };
 
