@@ -1,4 +1,5 @@
 const $calendar = document.querySelector('.calendar');
+const $calendarGrid = document.querySelector('.calendar-grid');
 const $datePicker = document.querySelector('.date-picker');
 const $month = document.querySelector('.month');
 const $year = document.querySelector('.year');
@@ -20,6 +21,8 @@ const MONTH = [
   'December',
 ];
 
+$calendarGrid.textContent = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].join(' ');
+
 const today = new Date();
 
 $month.textContent = MONTH[today.getMonth()];
@@ -35,8 +38,20 @@ window.onclick = e => {
 };
 
 let month = today.getMonth();
+console.log(month);
 let year = today.getFullYear();
-const day = today.getDate();
+const day = new Date(year, month, 1).getDay();
+console.log(day);
+// 0 ~ 6
+
+const date = new Date(year, month + 1, 0).getDate();
+
+const dates = [];
+
+for (let i = 1; i <= date; i++) {
+  dates.push(i);
+}
+console.log(dates);
 
 document.body.onload = () => {
   $next.onclick = () => {
