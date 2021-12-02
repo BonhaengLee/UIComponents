@@ -32,24 +32,25 @@
       }
 
       .calendar {
-        --calendar-width: 450px;
+        --calendar-width: 0px;
 
         width: var(--calendar-width);
         margin: 0 auto;
         border-radius: 15px;
-        box-shadow: 5px 2px 15px 12px rgba(0, 0, 0, 0.2);
+        border: 1px solid #cfcdcd;
+        /* box-shadow: 5px 2px 15px 12px rgba(0, 0, 0, 0.2); */
         /* display: none; */
       }
 
       .calendar-nav {
-        --calendar-width: 450px;
+        /* --calendar-width: 0px; */
 
         display: flex;
         justify-content: center;
         align-items: center;
         justify-content: space-between;
         padding: 20px;
-        width: var(--calendar-width);
+        /* width: calc(var(--calendar-width * 1/5)); */
         height: 100px;
         background-color: #3bba6d;
         color: #fff;
@@ -73,7 +74,8 @@
       .month-year {
         text-align: center;
       }
-
+      .calendar-grid {
+      }
       .calendar-grid,
       .days-grid,
       .date-grid {
@@ -82,11 +84,18 @@
       .days-grid,
       .date-grid {
         grid-template-columns: repeat(7, 1fr);
+        justify-items: center;
+        align-items: center;
+
+        min-width: 0;
+        min-height: 0;
       }
       .days-grid > div {
         color: #cfcdcd;
         font-weight: 700;
         padding: 22px 10px;
+
+        min-width: 0;
       }
       .date-grid > button {
         padding: 22px;
@@ -94,6 +103,14 @@
         outline: none;
         background: none;
         cursor: pointer;
+
+        min-width: 0;
+
+        justify-items: start;
+      }
+      .date-grid > button > time {
+        min-width: 0px;
+        display: inline;
       }
       .date-grid > button:hover {
         background-color: #3bba6d;

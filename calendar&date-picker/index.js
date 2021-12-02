@@ -56,22 +56,39 @@ const showDate = (year, month) => {
   // & : 저번달의 마지막 날짜
   const lastDateOfLastMonth = new Date(year, month, 0).getDate();
 
+  console.log(year, month);
+
   for (let i = 1; i <= firstDayOfThisMonth; i++) {
-    $dateGrid.innerHTML += `<button class="last-next"><time datetime="2019-01-01">${
+    $dateGrid.innerHTML += `<button class="last-next"><time datetime="${month - 1 === -1 ? year - 1 : year}-${
+      month - 1 === -1 ? '12' : month < 10 ? '0' + month : month
+    }-${lastDateOfLastMonth - firstDayOfThisMonth + i}">${
       lastDateOfLastMonth - firstDayOfThisMonth + i
     }</time></button>`;
   }
   for (let i = 1; i <= lastDateOfThisMonth; i++) {
-    if (i === today.getDate()) {
-      $dateGrid.innerHTML += `<button class="now"><time datetime="2019-01-01">${i}</time></button>`;
-    } else $dateGrid.innerHTML += `<button><time datetime="2019-01-01">${i}</time></button>`;
+    if (year === today.getFullYear() && month === today.getMonth() && i === today.getDate()) {
+      $dateGrid.innerHTML += `<button class="now"><time datetime="${year}-${
+        month + 1 < 10 ? '0' + (month + 1) : month + 1
+      }-${i < 10 ? '0' + i : i}">${i}</time></button>`;
+    } else
+      $dateGrid.innerHTML += `<button><time datetime="${year}-${month + 1 < 10 ? '0' + (month + 1) : month + 1}-${
+        i < 10 ? '0' + i : i
+      }">${i}</time></button>`;
   }
+
   for (let i = 1; i <= 6 - lastDayOfThisMonth; i++) {
-    $dateGrid.innerHTML += `<button class="last-next"><time datetime="2019-01-01">${i}</time></button>`;
+    $dateGrid.innerHTML += `<button class="last-next"><time datetime="${month + 1 === 12 ? year + 1 : year}-${
+      month + 1 === 12 ? '01' : month + 1 < 10 ? '0' + (month + 2) : month + 2
+    }-${i < 10 ? '0' + i : i}">${i}</time></button>`;
   }
 };
 
 document.body.onload = () => {
+  const $calendar = document.querySelector('.calendar');
+  const $calendarNav = document.querySelector('.calendar-nav');
+  $calendar.style.setProperty('--calendar-width', '450px');
+  $calendarNav.style.setProperty('--calendar-width', '450px');
+
   showDate(thisYear, thisMonth);
 
   $next.onclick = () => {
