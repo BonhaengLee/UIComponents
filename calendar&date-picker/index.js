@@ -56,8 +56,6 @@ const showDate = (year, month) => {
   // & : 저번달의 마지막 날짜
   const lastDateOfLastMonth = new Date(year, month, 0).getDate();
 
-  console.log(year, month);
-
   for (let i = 1; i <= firstDayOfThisMonth; i++) {
     $dateGrid.innerHTML += `<button class="last-next"><time datetime="${month - 1 === -1 ? year - 1 : year}-${
       month - 1 === -1 ? '12' : month < 10 ? '0' + month : month
@@ -66,7 +64,12 @@ const showDate = (year, month) => {
     }</time></button>`;
   }
   for (let i = 1; i <= lastDateOfThisMonth; i++) {
-    if (year === today.getFullYear() && month === today.getMonth() && i === today.getDate()) {
+    if (
+      $datePicker.value === '' &&
+      year === today.getFullYear() &&
+      month === today.getMonth() &&
+      i === today.getDate()
+    ) {
       $dateGrid.innerHTML += `<button class="now"><time datetime="${year}-${
         month + 1 < 10 ? '0' + (month + 1) : month + 1
       }-${i < 10 ? '0' + i : i}">${i}</time></button>`;
@@ -77,9 +80,9 @@ const showDate = (year, month) => {
   }
 
   for (let i = 1; i <= 6 - lastDayOfThisMonth; i++) {
-    $dateGrid.innerHTML += `<button class="last-next"><time datetime="${month + 1 === 12 ? year + 1 : year}-${
-      month + 1 === 12 ? '01' : month + 1 < 10 ? '0' + (month + 2) : month + 2
-    }-${i < 10 ? '0' + i : i}">${i}</time></button>`;
+    $dateGrid.innerHTML += `<button class="last-next"><time datetime="${month + 2 === 12 ? year + 1 : year}-${
+      month + 2 === 12 ? '01' : month + 2 < 10 ? '0' + (month + 2) : month + 2
+    }-${'0' + i}">${i}</time></button>`;
   }
 };
 
@@ -89,7 +92,23 @@ document.body.onload = () => {
   $calendar.style.setProperty('--calendar-width', '450px');
   $calendarNav.style.setProperty('--calendar-width', '450px');
 
+  const dateGrid = () => {
+    document.querySelector('.date-grid').onclick = e => {
+      if (e.target.matches('button')) {
+        $datePicker.value = e.target.firstElementChild.getAttribute('datetime');
+      } else {
+        $datePicker.value = e.target.getAttribute('datetime');
+      }
+      const $now = document.querySelector('.now');
+      $now?.classList.remove('now');
+      e.target.classList.add('now');
+
+      $calendar.style.display = 'none';
+    };
+  };
+
   showDate(thisYear, thisMonth);
+  dateGrid();
 
   $next.onclick = () => {
     if (thisMonth === 11) {
@@ -99,6 +118,7 @@ document.body.onload = () => {
       thisMonth++;
     }
     showDate(thisYear, thisMonth);
+    dateGrid();
     $month.textContent = MONTH[thisMonth];
     $year.textContent = thisYear;
   };
@@ -111,9 +131,8 @@ document.body.onload = () => {
       thisMonth--;
     }
     showDate(thisYear, thisMonth);
+    dateGrid();
     $month.textContent = MONTH[thisMonth];
     $year.textContent = thisYear;
   };
-
-  // $dateGrid.onclick = () => con
 };

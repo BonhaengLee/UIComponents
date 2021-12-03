@@ -38,19 +38,16 @@
         margin: 0 auto;
         border-radius: 15px;
         border: 1px solid #cfcdcd;
-        /* box-shadow: 5px 2px 15px 12px rgba(0, 0, 0, 0.2); */
-        /* display: none; */
+        box-shadow: 5px 2px 15px 12px rgba(0, 0, 0, 0.2);
+        display: none;
       }
 
       .calendar-nav {
-        /* --calendar-width: 0px; */
-
         display: flex;
         justify-content: center;
         align-items: center;
         justify-content: space-between;
         padding: 20px;
-        /* width: calc(var(--calendar-width * 1/5)); */
         height: 100px;
         background-color: #3bba6d;
         color: #fff;
@@ -68,14 +65,12 @@
         margin: 0;
         outline: 0;
         padding: 0;
-        /* overflow: auto; */
       }
 
       .month-year {
         text-align: center;
       }
-      .calendar-grid {
-      }
+
       .calendar-grid,
       .days-grid,
       .date-grid {
@@ -123,7 +118,6 @@
       }
       /* & : 날짜에 맞는 요일부터 정렬하는 스타일 */
       .date-grid button:nth-child(7n + 1) {
-        /* grid-column: 6; */
         color: rgb(248, 54, 54);
       }
       .date-grid > .now {
@@ -131,13 +125,6 @@
         color: white;
         border-radius: 100%;
       }
-
-      /* 1 8 15 */
-
-      /* .date-grid button:first-child {
-        grid-column: 6;
-        background-color: red;
-      } */
     </style>
     <script defer src="index.js"></script>
   </head>
@@ -158,32 +145,7 @@
         </button>
       </div>
 
-      <div class="calendar-grid">
-        <!-- <div class="days-grid">
-          <div>SUN</div>
-          <div>MON</div>
-          <div>TUE</div>
-          <div>WED</div>
-          <div>THU</div>
-          <div>FRI</div>
-          <div>SAT</div>
-        </div> -->
-
-        <div class="date-grid">
-          <button><time datetime="2019-01-01">1</time></button>
-          <button><time datetime="2019-01-02">2</time></button>
-          <button><time datetime="2019-01-03">3</time></button>
-          <button><time datetime="2019-01-04">4</time></button>
-          <button><time datetime="2019-01-05">5</time></button>
-          <button><time datetime="2019-01-06">6</time></button>
-          <button><time datetime="2019-01-07">7</time></button>
-          <button><time datetime="2019-01-07">7</time></button>
-          <button><time datetime="2019-01-07">7</time></button>
-          <button><time datetime="2019-01-07">7</time></button>
-          <button><time datetime="2019-01-07">7</time></button>
-          <button><time datetime="2019-01-07">7</time></button>
-        </div>
-      </div>
+      <div class="calendar-grid"></div>
     </div>
   </body>
 </html>
