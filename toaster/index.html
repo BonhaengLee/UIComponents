@@ -140,8 +140,7 @@
           let len = $toast.length;
 
           [...$toast].forEach(toast => {
-            toast.style.bottom = `${(len - 1) * 100}px`;
-            len--;
+            toast.style.bottom = `${--len * 100}px`;
           });
         },
       };
