@@ -102,10 +102,13 @@
         min-width: 0;
 
         justify-items: start;
+
+        border: 1px solid black;
+        display: block;
+        width: 100%;
       }
       .date-grid > button > time {
         min-width: 0px;
-        display: inline;
       }
       .date-grid > button:hover {
         background-color: #3bba6d;
@@ -115,6 +118,7 @@
 
       .last-next {
         color: #cfcdcd;
+        display: grid;
       }
       /* & : 날짜에 맞는 요일부터 정렬하는 스타일 */
       .date-grid button:nth-child(7n + 1) {
